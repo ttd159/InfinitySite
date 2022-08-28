@@ -1,0 +1,126 @@
+/* Thanh Header */
+
+.thanhHeader {
+    background-color: #046F94;
+    color: #CCE2EA;
+    width: 100%;
+}
+
+.slogan {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 80px;
+}
+
+.icon-header {
+    text-align: right;
+    line-height: 80px;
+}
+
+.icon-header i:hover {
+    font-size: 20px;
+    transition: 0.1s;
+}
+
+@media only screen and (min-width: 768px) {
+    .header {
+        padding: 0px 50px;
+    }
+}
+
+
+/* Thanh Menu */
+
+.thanhMenu {
+    background-color: #024359;
+    text-align: center;
+}
+
+.thanhMenu a {
+    color: #ffffff;
+    text-decoration: none;
+    line-height: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.thanhMenu a:hover {
+    text-shadow: 1px 1px 5px #ffffff;
+    color: #ffffff;
+    transition: 0.2s;
+}
+
+@media only screen and (min-width: 768px) {
+    .thanhMenu .menu .anGiang {
+        text-align: right;
+    }
+    .thanhMenu .menu .socTrang {
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .thanhHeader .icon-header {
+        display: none;
+    }
+    .thanhHeader .slogan {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* Footer */
+
+.footer .sloganFT {
+    color: #6189E8;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.kn {
+    width: 50%;
+    height: 45px;
+    float: left;
+    text-align: right;
+    line-height: 45px;
+    padding-right: 5px;
+    font-weight: bold;
+}
+
+.iconFT1 {
+    width: 50%;
+    height: 45px;
+    float: right;
+    font-size: 32px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.iconFT1 i:hover {
+    font-size: 35px;
+    transition: 0.1s;
+}
+
+.copyRight {
+    font-size: smaller;
+    text-align: center;
+    color: #333;
+    background-color: #e6e6e6;
+    padding: 5px 0px;
+}
+
+@media only screen and (max-width: 576px) {
+    .kn {
+        width: 100%;
+        text-align: center;
+    }
+    .iconFT1 {
+        width: 100%;
+        text-align: center;
+    }
+    .sloganFT {
+        width: 100%;
+        text-align: center;
+    }
+}

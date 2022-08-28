@@ -1,0 +1,230 @@
+{% extends 'MainApp/index.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        {% comment %} Thời tiết tổng quát {% endcomment %}
+        <div class="row thoiTietTongQuat mt-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <h3>Thời tiết tỉnh An Giang <span style="font-size: 14px;">({{timeHienTai}})</span> </h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <p>Nhiệt độ hiện tại: {{nhietDoHienTai}}&#x2103;</p>
+                            <p>Nhiệt độ cao nhất ngày: {{nhietDoCaoNhat}}&#x2103;</p>
+                            <p>Nhiệt độ thấp nhất ngày: {{nhietDoThapNhat}}&#x2103;</p>
+                        </div>
+                        <div class="col-4">
+                            <p>Tình trạng thời tiết: {{tinhTrangThoiTiet}}</p>
+                            <p>Lượng mưa: {{luongMua}} mm</p>
+                            <p>Tốc độ gió: {{tocDoGio}} mét/giây</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="iconTT"><img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Icon"></div>
+                            <p>{{nhietDoHienTai}}&#x2103;</p>
+                        </div>
+                    </div>
+                    <div class="row mx-0 px-0">
+                        <div class="col-12">
+                            <div class="container-fluid subContent mt-5">
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-12 box-weather text-center">
+                                        <div class="iconTT"><img src="http://openweathermap.org/img/w/{{icon1}}.png" alt="Icon"></div>
+                                        <p style="font-size: 20px; color: #197E9F;">{{nhietDo1}}&#x2103;</p>
+                                        <p>{{time1}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 box-weather text-center">
+                                        <div class="iconTT"><img src="http://openweathermap.org/img/w/{{icon2}}.png" alt="Icon"></div>
+                                        <p style="font-size: 20px; color: #197E9F;">{{nhietDo2}}&#x2103;</p>
+                                        <p>{{time2}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 box-weather text-center">
+                                        <div class="iconTT"><img src="http://openweathermap.org/img/w/{{icon3}}.png" alt="Icon"></div>
+                                        <p style="font-size: 20px; color: #197E9F;">{{nhietDo3}}&#x2103;</p>
+                                        <p>{{time3}}1</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 box-weather text-center">
+                                        <div class="iconTT"><img src="http://openweathermap.org/img/w/{{icon4}}.png" alt="Icon"></div>
+                                        <p style="font-size: 20px; color: #197E9F;">{{nhietDo4}}&#x2103;</p>
+                                        <p>{{time4}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 box-weather text-center">
+                                        <div class="iconTT"><img src="http://openweathermap.org/img/w/{{icon5}}.png" alt="Icon"></div>
+                                        <p style="font-size: 20px; color: #197E9F;">{{nhietDo5}}&#x2103;</p>
+                                        <p>{{time5}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 text-center">
+                                        <div class="iconTT"><img src="http://openweathermap.org/img/w/{{icon6}}.png" alt="Icon"></div>
+                                        <p style="font-size: 20px; color: #197E9F;">{{nhietDo6}}&#x2103;</p>
+                                        <p>{{time6}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% comment %} Hiển thị dũ liệu độ ẩm {% endcomment %}
+        <div class="row duLieuDoAm bieuDo mt-5">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Độ ẩm tỉnh An Giang hiện tại</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 text-center">
+                    
+                    
+                    <canvas id="tron"></canvas>
+    
+
+                    <script>
+                        let ctx = document.getElementById("tron").getContext("2d");
+                        let tron = new Chart(ctx, {
+                        type: "doughnut",
+                        data: {
+                            labels: ["Độ ẩm (%)", "Trống"],
+                            datasets: [
+                                {
+                                label: "Gross volume ($)",
+                                
+                                borderColor: "#8BB7F0",
+                                data: [ {%for item in data%}{{item}},{%endfor%}],
+                                backgroundColor: ["#8BB7F0", "#fff"],
+                                }
+                            ]
+                        },
+                        options: {
+                            title: {
+                                text: "Biểu đồ thể hiện độ ẩm",
+                                display: true
+                            }
+                        }
+                        });
+                    
+                    </script>
+                    
+                    
+                    
+                    </div>
+                    <div class="col-4 pt-5">
+                        <p style="font-size: 25px; padding-left: 20px;">Độ ẩm: {{doAmHienTai}}%</p>
+                        <img src="{% static 'MainApp/images/doam.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} Hiển thị dữ liệu độ ẩm 6 ngày kế tiếp {% endcomment %}
+        <div class="row duDoanDuLieuDoAm bieuDo mt-5">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Độ ẩm tỉnh An Giang 6 ngày tiếp theo</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                    
+                    
+                        <canvas id="duong"></canvas>
+    
+
+                        <script>
+                            let ctx1 = document.getElementById("duong").getContext("2d");
+
+                            let duong = new Chart(ctx1, {
+                            type: "line",
+                            data: {
+                                labels: [{%for item in time5Ngay%}{{item}},{%endfor%}],
+                                datasets: [
+                                    {
+                                    label: "Độ ẩm trong không khí",
+                                    backgroundColor: "#47afd480",
+                                    borderColor: "#417690",
+                                    data: [{%for item in doAm5Ngay%}{{item}},{%endfor%}]
+                                    }
+                                ]
+                            },
+                            options: {
+                                title: {
+                                    text: "Biểu đồ đường thể hiện độ ẩm 6 ngày tiếp theo",
+                                    display: true
+                                }
+                            }
+                            });
+                        
+                        </script>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} Hiển thị dữ liệu lượng mưa {% endcomment %}
+        <div class="row duLieuLuongMua bieuDo mt-5">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Biểu đồ thể hiện lượng mưa tỉnh An Giang</h3>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5 text-center">Tình trạng hiện tại: {{tinhTrangThoiTiet}}</div>
+                    <div class="col-2 text-center">
+                        <div class="iconTT"><img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Icon"></div>
+                    </div>
+                    <div class="col-5 text-center">Lượng mưa hiện tại: {{luongMua}} mm</div>
+                </div>
+                <div class="row">
+                    <div class="col-12"><h5>Dữ liệu 6 ngày tiếp theo</h5></div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                    
+                        <canvas id="cot"></canvas>
+    
+
+                        <script>
+                            let ctx2 = document.getElementById("cot").getContext("2d");
+
+                            let cot = new Chart(ctx2, {
+                            type: "bar",
+                            data: {
+                                labels: [{%for item in time6Ngay%}{{item}},{%endfor%}],
+                                datasets: [{
+                                    type: 'bar',
+                                    label: 'Lượng mưa (mm)',
+                                    data: [{%for item in luongMua6Ngay%}{{item}},{%endfor%}],
+                                    borderColor: '#3eb9e685',
+                                    backgroundColor: '#3eb9e685'
+                                },
+                                {
+                                    type: 'line',
+                                    label: 'Lượng mưa (mm)',
+                                    data: [{%for item in luongMua6Ngay%}{{item}},{%endfor%}],
+                                    borderColor: '#417690',
+                                }]
+                            },
+                            options: {
+                                        scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                        }
+                                    }
+                            });
+                        
+                        </script>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
